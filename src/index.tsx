@@ -2,7 +2,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import {
-  HomeScreen,
+  // HomeScreen,
   LoginScreen,
   Dashboard,
 } from './screens';
