@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
@@ -75,6 +75,12 @@ const RegisterScreen = ({ navigation }: Props) => {
       mode="contained" onPress={onSignUpPressed}>
         Sign up
       </Button>
+      <View style={styles.row}>
+        <Text>Already have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
+          <Text style={styles.link}>Login</Text>
+        </TouchableOpacity>
+      </View>
     </Background>
   );
 };
