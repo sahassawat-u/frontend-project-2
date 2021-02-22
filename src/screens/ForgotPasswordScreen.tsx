@@ -1,5 +1,7 @@
 import React, { memo,useState } from 'react'
+import { StyleSheet, Text, View ,TouchableOpacity, Image} from 'react-native';
 import Background from '../components/Background'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 import BackButton from '../components/BackButton'
 import Logo from '../components/Logo'
 import Header from '../components/Header'
@@ -13,7 +15,12 @@ const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [loading, setLoading] = useState(false)
   const [toast, setToast] = useState({ value: '', type: '' })
-
+  // const BackButton = (
+  //   <TouchableOpacity onPress={() => navigation.goBack()} >
+  //   {/* <Image style={styles.image} source={require('../assets/arrow_back.png')} /> */}
+  //   <Text>go back</Text>
+  //   </TouchableOpacity>
+  // )
   const sendResetPasswordEmail = async () => {
     const emailError = emailValidator(email.value)
     if (emailError) {
@@ -35,7 +42,14 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      {/* <BackButton /> */}
+      {/* <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+          <Text>go back</Text>
+        </TouchableOpacity> */}
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.container}>
+        <Image style={styles.image} source={require('../assets/arrow_back.png')} />
+      {/* <Text>go back</Text> */}
+      </TouchableOpacity>
       <Logo />
       <Header>Restore Password</Header>
       <TextInput
@@ -63,5 +77,15 @@ const ForgotPasswordScreen = ({ navigation }) => {
     </Background>
   )
 }
-
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    top: 10 + getStatusBarHeight(),
+    left: 4,
+  },
+  image: {
+    width: 24,
+    height: 24,
+  },
+})
 export default memo(ForgotPasswordScreen)
