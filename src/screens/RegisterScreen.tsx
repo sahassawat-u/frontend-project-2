@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
@@ -8,19 +8,20 @@ import TextInput from '../components/TextInput';
 import { theme } from '../core/theme';
 import { emailValidator, passwordValidator } from '../core/utils';
 import { Navigation } from '../types';
-import { loginUser } from '../plugin/auth'
+import { signInUser } from '../plugin/auth'
+
 
 type Props = {
   navigation: Navigation;
 };
 
-const LoginScreen = ({ navigation }: Props) => {
+const RegisterScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
   const [loading, setLoading] = useState()
   const [error, setError] = useState()
 
-  const _onLoginPressed = async () => {
+  const onSignUpPressed = async () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
 
@@ -29,25 +30,23 @@ const LoginScreen = ({ navigation }: Props) => {
       setPassword({ ...password, error: passwordError });
       return;
     }
-    // setLoading(true)
-    const response = await loginUser({
-      email: email.value,
-      password: password.value,
-    })
-    if (response.error) {
-      setError(response.error)
-    }
-    else {
-      navigation.navigate('Dashboard');
-    }
-    // setLoading(false)
+    setLoading(true)
+    const response = await signInUser({
+        email: email.value,
+        password: password.value,
+      })
+      if (response.error) {
+        setError(response.error)
+      }
+    setLoading(false)
+    navigation.navigate('LoginScreen');
   };
 
   return (
     <Background>
       <Logo />
 
-      <Header>Welcome</Header>
+      <Header>Create Account</Header>
 
       <TextInput
         label="Email"
@@ -72,15 +71,10 @@ const LoginScreen = ({ navigation }: Props) => {
         secureTextEntry
       />
 
-      <Button loading={loading} mode="contained" onPress={_onLoginPressed}>
-        Login
+      <Button loading={loading} 
+      mode="contained" onPress={onSignUpPressed}>
+        Sign up
       </Button>
-      <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
-          <Text style={styles.link}>Sign up</Text>
-        </TouchableOpacity>
-      </View>
     </Background>
   );
 };
@@ -104,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(LoginScreen);
+export default memo(RegisterScreen);
