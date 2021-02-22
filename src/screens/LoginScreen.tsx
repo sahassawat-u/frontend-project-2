@@ -71,7 +71,13 @@ const LoginScreen = ({ navigation }: Props) => {
         errorText={password.error}
         secureTextEntry
       />
-
+      <View style={styles.forgotPassword}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ForgotPasswordScreen')}
+        >
+          <Text style={styles.forgot}>Forgot your password?</Text>
+        </TouchableOpacity>
+      </View>
       <Button loading={loading} mode="contained" onPress={_onLoginPressed}>
         Login
       </Button>
