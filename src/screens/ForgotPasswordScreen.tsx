@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import Background from '../components/Background'
 import BackButton from '../components/BackButton'
 import Logo from '../components/Logo'
@@ -14,7 +14,7 @@ type Props = {
   navigation: Navigation;
 };
 
-const ForgotPasswordScreen = ({ navigation }) => {
+const ForgotPasswordScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [loading, setLoading] = useState(false)
   const [toast, setToast] = useState({ value: '', type: '' })
@@ -69,4 +69,4 @@ const ForgotPasswordScreen = ({ navigation }) => {
   )
 }
 
-export default ForgotPasswordScreen
+export default memo(ForgotPasswordScreen)
