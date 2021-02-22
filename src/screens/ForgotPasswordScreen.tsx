@@ -7,7 +7,12 @@ import TextInput from '../components/TextInput'
 import Button from '../components/Button'
 import { emailValidator } from '../core/utils'
 import { sendEmailWithPassword } from '../plugin/auth'
+import { Navigation } from '../types';
 import Toast from '../components/Toast'
+
+type Props = {
+  navigation: Navigation;
+};
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: '', error: '' })
