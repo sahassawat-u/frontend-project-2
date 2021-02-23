@@ -1,16 +1,21 @@
 import React, { memo,useState } from 'react';
-
+import Button from '../components/Button';
 import { Navigation } from '../types';
 import CalcButton from '../components/CalcButton';
 import CalcDisplay from '../components/CalcDisplay';
 import { StyleSheet,View,Text } from 'react-native';
+import { logoutUser } from '../plugin/auth';
 
 type Props = {
   navigation: Navigation;
 };
  
 const Dashboard = ({ navigation }: Props) => {
-
+    
+    const _onLogoutPressed = async () => {
+      await logoutUser();
+      navigation.navigate('LoginScreen');
+    }
     const [value, setValue] = useState('0');
     const [operator, setOperator] = useState('');
     const [operand1, setOperand1] = useState('');
@@ -116,11 +121,13 @@ const Dashboard = ({ navigation }: Props) => {
       setValue((parseInt(value)/100).toString());
     }
     return (
-
+    
     <View style={styles.container}>
+      
       <View style={styles.display}>
         <CalcDisplay>{value}</CalcDisplay>
       </View>
+      
       <View style={styles.buttonContainer}>
         <View style={styles.buttonRow}>
         <CalcButton function_={() => {reset()}} style backgroundColor='#505050' color='white'>C</CalcButton>
@@ -151,6 +158,9 @@ const Dashboard = ({ navigation }: Props) => {
           <CalcButton function_={() => {onDigitPress('.')}} style backgroundColor='#D4D4D2' color='white'>.</CalcButton>
           <CalcButton function_={() => {setEqual()}} style backgroundColor='#FF9500' color='white'>=</CalcButton>
         </View>
+        <Button mode="contained" onPress={_onLogoutPressed}>
+      logout
+    </Button>
       </View>
       </View>
     );
