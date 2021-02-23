@@ -16,7 +16,7 @@ const Router = createStackNavigator(
     ForgotPasswordScreen,
   },
   {
-    initialRouteName: 'Dashboard',
+    initialRouteName: 'LoginScreen',
     headerMode: 'none',
   }
 );
