@@ -1,2 +1,2 @@
 # Frontend-project-2
-cooroperation between Sahassawat and Rinradiphon
+coorperation between Sahassawat and Rinradiphon
